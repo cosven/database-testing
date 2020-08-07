@@ -19,3 +19,20 @@
 #### TODO 段念 - [测试团队与咖啡店](https://www.infoq.cn/article/2013/07/testing-and-coffeeshop/)
 
 ## 怎样量化一个软件的质量？
+
+## 其它系统怎样进行测试？
+
+### etcd
+
+截止 2020-08-07 日，在 coreos 官网上能找到两篇 etcd 测试相关的博客。
+简而言之就是：集成测试 + 错误注入，没啥特别新奇的地方。
+但框架和用例设计感觉值得借鉴和研究。
+
+* [New Functional Testing in etcd](https://coreos.com/blog/new-functional-testing-in-etcd.html)
+
+  > etcd’s functional test suite tests the functionality of an etcd cluster
+  > with a focus on failure-resistance under heavy usage.
+
+* [Testing distributed systems in Go](https://coreos.com/blog/testing-distributed-systems-in-go.html)
+
+  上面的集成测试框架 + gofail
