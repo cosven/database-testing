@@ -36,3 +36,14 @@
 * [Testing distributed systems in Go](https://coreos.com/blog/testing-distributed-systems-in-go.html)
 
   上面的集成测试框架 + gofail
+
+
+### FoundationDB
+
+* [Testing Distributed Systems with Deterministic Simulation](http://alex-ii.github.io/notes/2018/04/29/distributed_systems_with_deterministic_simulation.html)
+
+  1. 通过内置一个框架，让所有事件都通过一个线程来调度（感觉类比各种 loop），
+     这样可以知道事件发生的顺序。
+  2. 在 IO 操作等函数上封装一层，这样可以模拟现实中的错误。
+  3. Simulated processes need to be deterministic: the processes
+     being simulated need to themselves be deterministic
