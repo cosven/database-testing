@@ -24,6 +24,8 @@
 
 ### Cassandra
 
+截止 2020-09-14 日，Cassandra 官方只能找到以下两篇测试相关的博客，但看起来它们在 4.0 做了不少测试相关的事情。
+
 * [Testing Apache Cassandra 4.0](https://cassandra.apache.org/blog/2018/08/21/testing_apache_cassandra.html)
 
   简介了 Cassandra 使用的几种测试技术：
@@ -34,6 +36,19 @@
   * Upgrade Testing (Ensuring a Safe Upgrade Path)
 
   Property-Based Testing 这个概念之前听说的比较少，实际上似乎就是断言不变量 🤔
+
+* [Finding Bugs in Cassandra's Internals with Property-based Testing](https://cassandra.apache.org/blog/2018/10/17/finding_bugs_with_property_based_testing.html)
+
+  可以看到，Cassandra 也是在单测中使用了 QuickTeories 这样一个库来实践 property-based testing。
+  但个人感觉 property-based testing 或许更适合在系统测试中使用？
+
+Cassandra 开发文档上[有一页是介绍测试的](https://cassandra.apache.org/doc/latest/development/testing.html)，
+它们测试分为几部分：
+
+* Unit Testing
+* DTests（集成/系统测试，仍然是 deterministic 的）
+* Performance Testing
+
 
 ### etcd
 
