@@ -33,6 +33,8 @@
   * Distributed Tests and Fault-Injection Testing (Validating Behavior Under Fault Scenarios)
   * Upgrade Testing (Ensuring a Safe Upgrade Path)
 
+  Property-Based Testing 这个概念之前听说的比较少，实际上似乎就是断言不变量 🤔
+
 ### etcd
 
 截止 2020-08-07 日，在 coreos 官网上能找到两篇 etcd 测试相关的博客。
