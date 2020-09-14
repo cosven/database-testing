@@ -20,7 +20,18 @@
 
 ## 怎样量化一个软件的质量？
 
-## 其它系统怎样进行测试？
+## 典型系统的测试
+
+### Cassandra
+
+* [Testing Apache Cassandra 4.0](https://cassandra.apache.org/blog/2018/08/21/testing_apache_cassandra.html)
+
+  简介了 Cassandra 使用的几种测试技术：
+
+  * Replay Testing (Workload Recording, Log Replay, and Comparison)
+  * Fuzz Testing and Property-Based Testing (Dynamic Test Generation and Fuzzing)
+  * Distributed Tests and Fault-Injection Testing (Validating Behavior Under Fault Scenarios)
+  * Upgrade Testing (Ensuring a Safe Upgrade Path)
 
 ### etcd
 
