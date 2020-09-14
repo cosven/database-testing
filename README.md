@@ -20,6 +20,35 @@
 
 ## 怎样量化一个软件的质量？
 
+### 关于覆盖率
+
+假设一个软件刚开发出来，没人用，那怎样衡量这个软件的质量？
+
+[Uncovering Bugs in Distributed Storage Systems during Testing (not in Production!)](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/04/paper-1.pdf)
+> We interviewed technical leaders and senior managers in Microsoft Azure regarding
+the top problems in distributed system development. The consensus was that one of
+the most critical problems today is how to improve testing coverage so that bugs
+can be uncovered during testing and not in production. The need for better testing
+techniques is not specific to Microsoft; other companies, such as Amazon and Google,
+have acknowledged [7, 39] that testing methodologies have to improve to be able to
+reason about the correctness of increasingly more complex distributed systems that
+are used in production.
+
+这段话里面有一句比较关键： **The consensus was that one of the most critical problems today is how to improve testing coverage.**
+大概意思就是提升测试覆盖率是关键问题。
+
+但这个覆盖率指的是什么呢？要提升到什么程度呢？
+另外，分布式系统的 bug 很多都是由一系列的条件按照特定顺序才会触发，就算有类似 100% MC/DC 覆盖率，
+那又能覆盖多少这种情况？
+
+覆盖率，似乎很重要？
+
+[Why Is Random Testing Effective for Partition Tolerance Bugs?](https://dl.acm.org/doi/abs/10.1145/3158134)
+随机测试为什么有效？论文好像是说随机能达成一定的覆盖率。不过它这个覆盖率，说的不是代码覆盖率，
+而是和网络分区相关的覆盖率。大概可以理解为有多少种分区类型把…然后和 read/write 组合一下。
+
+还有两篇论文也聊到了覆盖率：其中一个聊到了 SQL 覆盖率。
+
 ## 典型系统的测试
 
 ### Cassandra
