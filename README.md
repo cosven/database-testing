@@ -104,3 +104,27 @@ Cassandra 开发文档上[有一页是介绍测试的](https://cassandra.apache.
   2. 在 IO 操作等函数上封装一层，这样可以模拟现实中的错误。
   3. Simulated processes need to be deterministic: the processes
      being simulated need to themselves be deterministic
+
+
+### Cockroach
+
+* [Introducing Pebble: A RocksDB Inspired Key-Value Store Written in Go](https://www.cockroachlabs.com/blog/pebble-rocksdb-kv-store/)
+
+  Cockroach DB 引入一个新的 Key-Value Store(Pebble) 来代替 RocksDB。比较感兴趣的是它如何测试 Pebble 的：
+
+  它的测试分为几层（读后感：分层会给读者/大家一种很清晰的感觉）
+  1. Pebble unit tests
+  2. Randomized tests (a.k.a metamorphic tests)
+  3. Bidirectional compatibility tests
+  4. CockroachDB unit tests
+  5. CockroachDB nightly tests (a.k.a. roachtests)
+
+  有趣的部分是 metamorphic tests
+  > The metamorphic tests have proved incredibly useful in finding existing bugs,
+  > and quickly catching regressions when new functionality has been introduced.
+
+  它的变质测试也是分为两级：自己和自己对比；自己和 RocksDB 对比。
+  自己和自己怎样对比呢？使用不同配置。
+  该怎样设计不同的配置呢？依据是不同的配置会走不同的代码路径，然后设计一些配置（灰盒）。另外还会随机一些配置。
+
+  变质测试 + 错误注入 这些手段一般会结合在一起。
