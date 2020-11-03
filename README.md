@@ -16,6 +16,7 @@
         - [etcd](#etcd)
         - [FoundationDB](#foundationdb)
         - [Cockroach](#cockroach)
+        - [RocksDB](#rocksdb)
 
 <!-- markdown-toc end -->
 
