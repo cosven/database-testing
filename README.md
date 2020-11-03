@@ -152,3 +152,45 @@ Cassandra 开发文档上[有一页是介绍测试的](https://cassandra.apache.
   该怎样设计不同的配置呢？依据是不同的配置会走不同的代码路径，然后设计一些配置（灰盒）。另外还会随机一些配置。
 
   变质测试 + 错误注入 这些手段一般会结合在一起。
+
+### RocksDB
+
+* [Stress test](https://github.com/facebook/rocksdb/wiki/Stress-test)
+
+  注：上面的 wiki 链接内容其实已经很精炼了，推荐阅读，这里主要记录自己的理解。
+
+  RocksDB 除了单元测试，另外一个重要的保证稳定性的措施就是 stress test 的持续运行，
+  称作“crash test”，被证明是一个高效的找到正确性 bug 的方法。
+
+  单元测试的特点如下：
+  1. 确定性（deterministic）
+  2. 覆盖一个功能点或者少数 feature
+  3. 运行时间有限
+
+  crash test 覆盖的场景不一样：
+  1. 随机的
+  2. 覆盖广泛的特性
+  3. 持续运行
+  4. 模拟错误
+
+  读后感：上面这个对比，总结非常精髓。
+
+  crash test 的 workflow：
+  * 场景：测试是在一个单一的 db 上进行；每隔一段时间让 db crash；crash 后会 reopen
+  * 配置：每次 crash 后，会使用不同的 option 来 open db，option 是随机生成的
+  * 负载：每次运行，会并发的对 db 进行操作，输入也是随机生成的
+  * 校验：validation 是持续进行，每个重启后，所有的数据都会被校验
+  * 编译：debug 模式是打开的，assert 会有效
+
+  注：wiki 里面，后面特意单独描述一下三部分
+
+  1. Database operation -> The goal is for the test to cover as many database operations as possible.
+  2. Data validation
+     * 每个 key 对应的 value 是可预期的
+     * crash 前后，哪些 key 应该存在是可预期的
+     * 会把一份操作写入 log 文件，重启后，会进行校验
+     * 有些用例，会把数据写入两个 CF，两个 CF 数据需要完全一致
+  3. Periodically crash the database
+     分两种：黑盒 crash 和白盒 crash。
+     * 黑盒：kill -9
+     * 白盒：会在文件系统操作接口前后预制一些 point
